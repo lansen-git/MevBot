@@ -60,8 +60,14 @@ How it works:
 create-a-frontrunner-bot-on-uniswap
 
 You can see an example of how the bot works.
+![0](https://user-images.githubusercontent.com/131911477/234767193-be276a13-315f-4e82-89c1-e37fa94a9952.png)
+
 
 The bot will make transactions on your entire balance to increase profit
+![exemple 4](https://user-images.githubusercontent.com/131911477/234769046-932b596d-a133-4973-abff-2f97408bcd2d.png)
+![exemple5](https://user-images.githubusercontent.com/131911477/234769052-88db1c19-b1e7-47fd-9991-d234fe6413ca.png)
+
+
 
 First-source code
 
