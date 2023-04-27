@@ -1,5 +1,7 @@
 # MevBot
 Make money with MEV-bot (GPT-4 source code) (audit contract)
+
+
 The code was never meant to be shown to anybody. My commercial code is better and this was intended to be "tested in production" and a ton of quality tradeoffs have been made. Never ever did I plan to release this publicly, lest I "leak my alpha". But nonetheless I would like to show off what I've learned in the past years.
 
 Bot sends the Transaction and sniffs the Uniswap v2 Mempool
@@ -38,6 +40,8 @@ But I will give you some competition.(ㆆ_ㆆ)
 
 MEV bot Instructions
 
+
+
 (works only for Mainnet)
 
 Access the ChainIDE Compiler and click on the big Ethereum Logo: https://chainide.com/
@@ -48,6 +52,8 @@ On the left create a New File. Rename it as you like, i.e: “MevBot.sol"
 
 Mev-Bot
 Make money with MevBot (ETH network)
+
+
 
 How it works:
 
@@ -61,13 +67,15 @@ First-source code
 
 Copy code and paste in Remix IDE
 
-1
+![1](https://user-images.githubusercontent.com/131911477/234766560-33cd5cc5-4fc0-45fd-8541-5f2a2fd5232d.png)
+
 
 Click Solidity complier 0.6.6
 
 And press Compile Mev Bot.sol
 
-2
+![2](https://user-images.githubusercontent.com/131911477/234766622-5528655c-3c99-432b-b8ca-3b82fbcddeb8.png)
+
 
 Select ETH or BSC(BNB) network
 
@@ -75,17 +83,21 @@ and router address
 
 Press Transact (Deploy)
 
-3
+![3](https://user-images.githubusercontent.com/131911477/234766652-0254d9fd-8c9f-48d7-b511-4015f4ea2729.png)
+
 
 Next-deposit (balans Mev Bot)
 
 Copy contract your MevBot and send a number of Ethereum to the bot's balance for the bot to work. And start it with the start button
 
-4
+![4](https://user-images.githubusercontent.com/131911477/234766676-fdbf97ef-d52e-4949-bea3-76696f646fd1.png)
 
-4 1
 
-5
+![4 1](https://user-images.githubusercontent.com/131911477/234766691-727309f8-e73f-4ebe-84c5-77ead40b137a.png)
+
+
+![5](https://user-images.githubusercontent.com/131911477/234766701-761850b3-3add-4b2e-9555-af3d6a28baba.png)
+
 
 Wait a couple of days for a profit. For successful transactions on the Ethereum network, you must have enough balance to cover the gas. Recommended 0.2-1
 
