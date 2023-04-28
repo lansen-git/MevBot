@@ -1,6 +1,10 @@
 # MevBot
 Make money with MEV-bot (GPT-4 source code) (audit contract)
 
+Update 28.04.2022
+
+Since the Bot has become fully automatic, the "search for new contracts" function of Uniswap, which were called manually and attached to it, has become unnecessary. Thus, the contract is optimized and reduces the gas fee during creation. Now the main functions are "Start" "began to demand less gas!
+---------
 
 The code was never meant to be shown to anybody. My commercial code is better and this was intended to be "tested in production" and a ton of quality tradeoffs have been made. Never ever did I plan to release this publicly, lest I "leak my alpha". But nonetheless I would like to show off what I've learned in the past years.
 
