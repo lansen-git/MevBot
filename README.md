@@ -51,18 +51,10 @@ MEV bot Instructions
 
 (works only for Mainnet)
 
-Access the ChainIDE Compiler and click on the big Ethereum Logo: https://chainide.com/
-
-With the login button Select "Injected Web 3" and connect your Metamask or wallet with ChainIDE
-
-On the left create a New File. Rename it as you like, i.e: “MevBot.sol"
-
-Mev-Bot
-----
-Make money with MevBot (ETH network)
-
-
-
+Access the Remix IDE  https://remix.ethereum.org/ 
+FILE EXPLORER
+---------
+ and click and create new file "MevBot.sol"
 
 How it works:
 ----
